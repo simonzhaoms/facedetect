@@ -12,6 +12,7 @@ dependencies:
     - matplotlib
     - opencv-contrib-python
     - toolz
+    - numpy==1.13.3
   files:
     - demo.py
     - utils.py
