@@ -8,7 +8,7 @@ meta:
   license   : gpl3
   display   : demo, score
 dependencies:
-  pip:
+  pip3:
     - matplotlib
     - opencv-contrib-python
     - toolz
