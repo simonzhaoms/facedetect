@@ -40,7 +40,6 @@ To detect faces:
 
     ```console
     $ ml score facedetect https://github.com/opencv/opencv/raw/master/samples/data/lena.jpg
-	$ ml score facedetect https://github.com/ageitgey/face_recognition/raw/master/tests/test_images/obama.jpg --scaleFactor 1.3
     ```
 
 Sometimes the algorithm will fail to detect real faces, then you need
