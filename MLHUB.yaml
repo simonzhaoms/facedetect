@@ -1,0 +1,24 @@
+--- # Simple face detection
+meta:
+  name      : facedetect
+  title     : Simple face detection.
+  languages : py
+  version   : 0.1.0
+  keywords  : face detection, python3, computer vision
+  license   : gpl3
+  display   : demo
+dependencies:
+  pip:
+    - matplotlib
+    - opencv-contrib-python
+    - toolz
+  files:
+    - demo.py
+    - utils.py
+    - score.py
+    - images/
+    - haarcascade_frontalface_default.xml
+    - README.md
+commands:
+  demo: Demostrate face detection on sample images.
+  score: Detect faces on provided image files or URL.
