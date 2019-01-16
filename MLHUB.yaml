@@ -6,7 +6,7 @@ meta:
   version   : 0.1.0
   keywords  : face detection, python3, computer vision
   license   : gpl3
-  display   : demo
+  display   : demo, score
 dependencies:
   pip:
     - matplotlib
