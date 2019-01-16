@@ -3,10 +3,11 @@ meta:
   name      : facedetect
   title     : Simple face detection.
   languages : py
-  version   : 0.1.2
+  version   : 0.1.3
   keywords  : face detection, python3, computer vision
   license   : gpl3
   display   : demo, score
+  url       : https://github.com/simonzhaoms/facedetect
 dependencies:
   python3:
     - matplotlib
