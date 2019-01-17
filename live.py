@@ -72,6 +72,8 @@ plt.gcf().canvas.mpl_connect(  # Set plot window close event
 # See [update frame in matplotlib with live camera preview](https://stackoverflow.com/a/44604435)
 # ----------------------------------------------------------------------
 
+print("\nPlease type 'q' to quit.")
+
 im = plt.gca().imshow(get_faces_frame(camera, face_params=face_params))
 video = FuncAnimation(
     plt.gcf(),
