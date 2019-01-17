@@ -2,9 +2,12 @@ import cv2 as cv
 import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
 import numpy as np
+import os
 import re
 import toolz
 import urllib
+
+from mlhub import utils as mlutils
 
 FACE_CASCADE = cv.CascadeClassifier("haarcascade_frontalface_default.xml")
 
@@ -139,7 +142,7 @@ def read_cv_image_from(url):
 
     return toolz.pipe(
         url,
-        urllib.request.urlopen if _is_url(url) else lambda x: open(x, 'rb'),
+        urllib.request.urlopen if _is_url(url) else lambda x: open(get_abspath(x), 'rb'),
         lambda x: x.read(),
         bytearray,
         lambda x: np.asarray(x, dtype="uint8"),
@@ -151,3 +154,12 @@ def get_faces_frame(cap):
     faces = detect_faces(frame)
     mark_faces(frame, faces, inplace=True)
     return convert_cv2matplot(frame)
+
+
+def get_abspath(path):
+    path = os.path.expanduser(path)
+    if not os.path.isabs(path):
+        CMD_CWD = mlutils.get_cmd_cwd()
+        path = os.path.join(CMD_CWD, path)
+
+    return os.path.abspath(path)

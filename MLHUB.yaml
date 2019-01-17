@@ -3,7 +3,7 @@ meta:
   name      : facedetect
   title     : Simple face detection.
   languages : py
-  version   : 0.2.1
+  version   : 0.2.2
   keywords  : face detection, python3, computer vision
   license   : gpl3
   display   : demo, score, live
