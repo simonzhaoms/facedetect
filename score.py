@@ -6,9 +6,8 @@ from utils import (
     mark_faces,
     plot_side_by_side_comparison,
     read_cv_image_from,
-    MIN_NEIGHBORS,
-    MIN_SIZE,
-    SCALE_FACTOR,
+    FaceParams,
+    FACEPARAMS,
 )
 
 # ----------------------------------------------------------------------
@@ -29,38 +28,39 @@ parser.add_argument(
 parser.add_argument(
     '--scaleFactor',
     type=float,
-    default=SCALE_FACTOR,
-    help='scale factor ({} by default, must > 1)'.format(SCALE_FACTOR)
+    default=FACEPARAMS.scaleFactor,
+    help='scale factor ({} by default, must > 1)'.format(FACEPARAMS.scaleFactor)
 )
 
 parser.add_argument(
     '--minNeighbors',
     type=int,
-    default=MIN_NEIGHBORS,
-    help='minimum neighbors ({} by default, integer, must > 1)'.format(MIN_NEIGHBORS)
+    default=FACEPARAMS.minNeighbors,
+    help='minimum neighbors ({} by default, integer, must > 1)'.format(FACEPARAMS.minNeighbors)
 )
 
 parser.add_argument(
     '--minSize',
     type=int,
-    default=MIN_SIZE,
-    help='minimum size ({} by default, integer, must > 1)'.format(MIN_SIZE)
+    default=FACEPARAMS.minSize,
+    help='minimum size ({} by default, integer, must > 1)'.format(FACEPARAMS.minSize)
 )
 
 args = parser.parse_args()
+
+face_params = FaceParams(
+    args.scaleFactor,
+    args.minNeighbors,
+    args.minSize)
 
 # ----------------------------------------------------------------------
 # Face detection
 # ----------------------------------------------------------------------
 
+
 image = read_cv_image_from(args.image)
 
-faces = detect_faces(
-    image,
-    scaleFactor=args.scaleFactor,
-    minNeighbors=args.minNeighbors,
-    minSize=args.minSize
-)
+faces = detect_faces(image, face_params=face_params)
 
 print("Found {0} faces!".format(len(faces)))
 

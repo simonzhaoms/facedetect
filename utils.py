@@ -7,6 +7,7 @@ import re
 import toolz
 import urllib
 
+from collections import namedtuple
 from mlhub import utils as mlutils
 
 FACE_CASCADE = cv.CascadeClassifier("haarcascade_frontalface_default.xml")
@@ -14,9 +15,8 @@ FACE_CASCADE = cv.CascadeClassifier("haarcascade_frontalface_default.xml")
 MARK_COLOR = (0, 255, 0)  # Green
 MARK_WIDTH = 4
 
-SCALE_FACTOR = 1.2
-MIN_NEIGHBORS = 5
-MIN_SIZE = 30
+FaceParams = namedtuple('FaceParams', 'scaleFactor minNeighbors minSize')
+FACEPARAMS = FaceParams(1.2, 5, 30)
 
 
 def _plot_image(ax, img, cmap=None, label=''):
@@ -71,7 +71,7 @@ def plot_side_by_side_comparison(
     plt.show()
 
 
-def detect_faces(image, scaleFactor=SCALE_FACTOR, minNeighbors=MIN_NEIGHBORS, minSize=MIN_SIZE):
+def detect_faces(image, face_params=FACEPARAMS):
 
     # Convert image into grey-scale
 
@@ -81,9 +81,9 @@ def detect_faces(image, scaleFactor=SCALE_FACTOR, minNeighbors=MIN_NEIGHBORS, mi
 
     faces = FACE_CASCADE.detectMultiScale(
         gray,
-        scaleFactor=scaleFactor,
-        minNeighbors=minNeighbors,
-        minSize=(minSize, minSize))
+        scaleFactor=face_params.scaleFactor,
+        minNeighbors=face_params.minNeighbors,
+        minSize=(face_params.minSize, face_params.minSize))
 
     return faces
 
@@ -149,10 +149,11 @@ def read_cv_image_from(url):
         lambda x: cv.imdecode(x, cv.IMREAD_COLOR))
 
 
-def get_faces_frame(cap):
+def get_faces_frame(cap, face_params=FACEPARAMS):
     """Read one frame from camera and do face detection."""
+
     ret, frame = cap.read()  # Capture frame-by-frame
-    faces = detect_faces(frame)
+    faces = detect_faces(frame, face_params=face_params)
     mark_faces(frame, faces, inplace=True)
     return convert_cv2matplot(frame)
 
