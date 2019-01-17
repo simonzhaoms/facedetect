@@ -6,14 +6,14 @@ import re
 import toolz
 import urllib
 
-FACECASCADE = cv.CascadeClassifier("haarcascade_frontalface_default.xml")
+FACE_CASCADE = cv.CascadeClassifier("haarcascade_frontalface_default.xml")
 
-MARKCOLOR = (0, 255, 0)  # Green
-MARKWIDTH = 4
+MARK_COLOR = (0, 255, 0)  # Green
+MARK_WIDTH = 4
 
-SCALEFACTOR = 1.2
-MINNEIGHBORS = 5
-MINSIZE = 30
+SCALE_FACTOR = 1.2
+MIN_NEIGHBORS = 5
+MIN_SIZE = 30
 
 
 def _plot_image(ax, img, cmap=None, label=''):
@@ -68,34 +68,34 @@ def plot_side_by_side_comparison(
     plt.show()
 
 
-def detect_faces(imagePath, scaleFactor=SCALEFACTOR, minNeighbors=MINNEIGHBORS, minSize=MINSIZE):
+def detect_faces(image, scaleFactor=SCALE_FACTOR, minNeighbors=MIN_NEIGHBORS, minSize=MIN_SIZE):
 
-    # Read the image
-
-    image = read_cv_image_from(imagePath)
+    # Convert image into grey-scale
 
     gray = cv.cvtColor(image, cv.COLOR_BGR2GRAY)
 
     # Detect faces in the image
 
-    faces = FACECASCADE.detectMultiScale(
+    faces = FACE_CASCADE.detectMultiScale(
         gray,
         scaleFactor=scaleFactor,
         minNeighbors=minNeighbors,
         minSize=(minSize, minSize))
 
-    return image, faces
+    return faces
 
 
-def mark_faces(image, faces):
+def mark_faces(image, faces, inplace=False):
     """Mark the <faces> in <image>."""
 
-    result = image.copy()
+    result = image
+    if not inplace:
+        result = image.copy()
 
     # Draw a rectangle around the faces
 
     for (x, y, w, h) in faces:
-        cv.rectangle(result, (x, y), (x + w, y + h), MARKCOLOR, MARKWIDTH)
+        cv.rectangle(result, (x, y), (x + w, y + h), MARK_COLOR, MARK_WIDTH)
 
     return result
 
@@ -106,12 +106,15 @@ def convert_cv2matplot(*images):
     Because OpenCV and Matplotlib use different color spaces.
     """
 
-    res = []
-    for image in images:
-        image = cv.cvtColor(image, cv.COLOR_BGR2RGB)
-        res.append(image)
+    if len(images) > 0:
+        res = []
+        for image in images:
+            image = cv.cvtColor(image, cv.COLOR_BGR2RGB)
+            res.append(image)
 
-    return tuple(res)
+        return res[0] if len(res) == 1 else tuple(res)
+    else:
+        return None
 
 
 def _is_url(url):

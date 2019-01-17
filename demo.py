@@ -2,10 +2,11 @@ import glob
 import os
 
 from utils import (
-    plot_side_by_side_comparison,
+    convert_cv2matplot,
     detect_faces,
     mark_faces,
-    convert_cv2matplot,
+    plot_side_by_side_comparison,
+    read_cv_image_from,
 )
 
 # Setup
@@ -24,7 +25,9 @@ imagePaths.sort()
 
 for imagePath in imagePaths:
 
-    image, faces = detect_faces(imagePath)
+    image = read_cv_image_from(imagePath)
+
+    faces = detect_faces(image)
 
     print("Found {0} faces!".format(len(faces)))
 

@@ -1,13 +1,14 @@
 import argparse
 
 from utils import (
-    plot_side_by_side_comparison,
+    convert_cv2matplot,
     detect_faces,
     mark_faces,
-    convert_cv2matplot,
-    SCALEFACTOR,
-    MINNEIGHBORS,
-    MINSIZE,
+    plot_side_by_side_comparison,
+    read_cv_image_from,
+    MIN_NEIGHBORS,
+    MIN_SIZE,
+    SCALE_FACTOR,
 )
 
 # Parse command line arguments
@@ -26,30 +27,32 @@ parser.add_argument(
 parser.add_argument(
     '--scaleFactor',
     type=float,
-    default=SCALEFACTOR,
-    help='scale factor ({} by default, must > 1)'.format(SCALEFACTOR)
+    default=SCALE_FACTOR,
+    help='scale factor ({} by default, must > 1)'.format(SCALE_FACTOR)
 )
 
 parser.add_argument(
     '--minNeighbors',
     type=int,
-    default=MINNEIGHBORS,
-    help='minimum neighbors ({} by default, integer, must > 1)'.format(MINNEIGHBORS)
+    default=MIN_NEIGHBORS,
+    help='minimum neighbors ({} by default, integer, must > 1)'.format(MIN_NEIGHBORS)
 )
 
 parser.add_argument(
     '--minSize',
     type=int,
-    default=MINSIZE,
-    help='minimum size ({} by default, integer, must > 1)'.format(MINSIZE)
+    default=MIN_SIZE,
+    help='minimum size ({} by default, integer, must > 1)'.format(MIN_SIZE)
 )
 
 args = parser.parse_args()
 
 # Face detection
 
-image, faces = detect_faces(
-    args.image,
+image = read_cv_image_from(args.image)
+
+faces = detect_faces(
+    image,
     scaleFactor=args.scaleFactor,
     minNeighbors=args.minNeighbors,
     minSize=args.minSize
