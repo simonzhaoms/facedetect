@@ -9,7 +9,9 @@ from utils import (
     read_cv_image_from,
 )
 
+# ----------------------------------------------------------------------
 # Setup
+# ----------------------------------------------------------------------
 
 IMG_PATH = 'images'
 
@@ -22,6 +24,10 @@ print("Please close each image (Ctrl-w) to proceed through the demonstration.\n"
 
 imagePaths = glob.glob(os.path.join(IMG_PATH, "*"))
 imagePaths.sort()
+
+# ----------------------------------------------------------------------
+# Face detection
+# ----------------------------------------------------------------------
 
 for imagePath in imagePaths:
 

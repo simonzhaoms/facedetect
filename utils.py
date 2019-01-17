@@ -150,6 +150,7 @@ def read_cv_image_from(url):
 
 
 def get_faces_frame(cap):
+    """Read one frame from camera and do face detection."""
     ret, frame = cap.read()  # Capture frame-by-frame
     faces = detect_faces(frame)
     mark_faces(frame, faces, inplace=True)
@@ -157,6 +158,14 @@ def get_faces_frame(cap):
 
 
 def get_abspath(path):
+    """Return the absolute path of <path>.
+
+    Because the working directory of MLHUB model is ~/.mlhub/<model>,
+    when user run 'ml score facedetect <image-path>', the <image-path> may be a
+    path relative to the path where 'ml score facedetect' is typed, to cope with
+    this scenario, mlhub provides mlhub.utils.get_cmd_cwd() to obtain this path.
+    """
+
     path = os.path.expanduser(path)
     if not os.path.isabs(path):
         CMD_CWD = mlutils.get_cmd_cwd()

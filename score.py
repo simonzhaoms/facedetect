@@ -11,7 +11,9 @@ from utils import (
     SCALE_FACTOR,
 )
 
+# ----------------------------------------------------------------------
 # Parse command line arguments
+# ----------------------------------------------------------------------
 
 parser = argparse.ArgumentParser(
     prog='score',
@@ -47,7 +49,9 @@ parser.add_argument(
 
 args = parser.parse_args()
 
+# ----------------------------------------------------------------------
 # Face detection
+# ----------------------------------------------------------------------
 
 image = read_cv_image_from(args.image)
 
@@ -65,4 +69,3 @@ result = mark_faces(image, faces)
 image, result = convert_cv2matplot(image, result)
 
 plot_side_by_side_comparison(image, result, rightlabel="Detected Faces")
-
