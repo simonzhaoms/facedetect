@@ -144,3 +144,10 @@ def read_cv_image_from(url):
         bytearray,
         lambda x: np.asarray(x, dtype="uint8"),
         lambda x: cv.imdecode(x, cv.IMREAD_COLOR))
+
+
+def get_faces_frame(cap):
+    ret, frame = cap.read()  # Capture frame-by-frame
+    faces = detect_faces(frame)
+    mark_faces(frame, faces, inplace=True)
+    return convert_cv2matplot(frame)
