@@ -3,7 +3,7 @@ meta:
   name      : facedetect
   title     : Simple face detection.
   languages : py
-  version   : 0.2.0
+  version   : 0.2.1
   keywords  : face detection, python3, computer vision
   license   : gpl3
   display   : demo, score, live
@@ -19,6 +19,7 @@ dependencies:
     - demo.py
     - utils.py
     - score.py
+    - live.py
     - images/
     - haarcascade_frontalface_default.xml
     - README.md
