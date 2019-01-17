@@ -8,6 +8,14 @@ import urllib
 
 FACECASCADE = cv.CascadeClassifier("haarcascade_frontalface_default.xml")
 
+MARKCOLOR = (0, 255, 0)  # Green
+MARKWIDTH = 4
+
+SCALEFACTOR = 1.2
+MINNEIGHBORS = 5
+MINSIZE = 30
+
+
 def _plot_image(ax, img, cmap=None, label=''):
     """Plot <img> in <ax>."""
 
@@ -60,7 +68,7 @@ def plot_side_by_side_comparison(
     plt.show()
 
 
-def detect_faces(imagePath, scaleFactor=1.2, minNeighbors=5, minSize=30):
+def detect_faces(imagePath, scaleFactor=SCALEFACTOR, minNeighbors=MINNEIGHBORS, minSize=MINSIZE):
 
     # Read the image
 
@@ -87,7 +95,7 @@ def mark_faces(image, faces):
     # Draw a rectangle around the faces
 
     for (x, y, w, h) in faces:
-        cv.rectangle(result, (x, y), (x + w, y + h), (0, 255, 0), 4)
+        cv.rectangle(result, (x, y), (x + w, y + h), MARKCOLOR, MARKWIDTH)
 
     return result
 

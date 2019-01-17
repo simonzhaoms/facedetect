@@ -5,6 +5,9 @@ from utils import (
     detect_faces,
     mark_faces,
     convert_cv2matplot,
+    SCALEFACTOR,
+    MINNEIGHBORS,
+    MINSIZE,
 )
 
 # Parse command line arguments
@@ -23,22 +26,22 @@ parser.add_argument(
 parser.add_argument(
     '--scaleFactor',
     type=float,
-    default=1.2,
-    help='scale factor (1.2 by default, must > 1)'
+    default=SCALEFACTOR,
+    help='scale factor ({} by default, must > 1)'.format(SCALEFACTOR)
 )
 
 parser.add_argument(
     '--minNeighbors',
     type=int,
-    default=5,
-    help='minimum neighbors (5 by default, integer, must > 1)'
+    default=MINNEIGHBORS,
+    help='minimum neighbors ({} by default, integer, must > 1)'.format(MINNEIGHBORS)
 )
 
 parser.add_argument(
     '--minSize',
     type=int,
-    default=30,
-    help='minimum size (30 by default, integer, must > 1)'
+    default=MINSIZE,
+    help='minimum size ({} by default, integer, must > 1)'.format(MINSIZE)
 )
 
 args = parser.parse_args()
