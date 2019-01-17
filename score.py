@@ -3,6 +3,8 @@ import argparse
 from utils import (
     convert_cv2matplot,
     detect_faces,
+    get_abspath,
+    is_url,
     mark_faces,
     plot_side_by_side_comparison,
     read_cv_image_from,
@@ -58,7 +60,7 @@ face_params = FaceParams(
 # ----------------------------------------------------------------------
 
 
-image = read_cv_image_from(args.image)
+image = read_cv_image_from(args.image if is_url(args.image) else get_abspath(args.image))
 
 faces = detect_faces(image, face_params=face_params)
 

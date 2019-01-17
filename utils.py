@@ -120,7 +120,7 @@ def convert_cv2matplot(*images):
         return None
 
 
-def _is_url(url):
+def is_url(url):
     """Check if url is a valid URL."""
 
     urlregex = re.compile(
@@ -142,7 +142,7 @@ def read_cv_image_from(url):
 
     return toolz.pipe(
         url,
-        urllib.request.urlopen if _is_url(url) else lambda x: open(get_abspath(x), 'rb'),
+        urllib.request.urlopen if is_url(url) else lambda x: open(x, 'rb'),
         lambda x: x.read(),
         bytearray,
         lambda x: np.asarray(x, dtype="uint8"),
