@@ -3,13 +3,13 @@ import argparse
 from utils import (
     convert_cv2matplot,
     detect_faces,
+    FaceParams,
     get_abspath,
     is_url,
     mark_faces,
+    option_parser,
     plot_side_by_side_comparison,
     read_cv_image_from,
-    FaceParams,
-    FACEPARAMS,
 )
 
 # ----------------------------------------------------------------------
@@ -18,6 +18,7 @@ from utils import (
 
 parser = argparse.ArgumentParser(
     prog='score',
+    parents=[option_parser],
     description='Detect faces in an image.'
 )
 
@@ -27,28 +28,9 @@ parser.add_argument(
     help='image path or URL'
 )
 
-parser.add_argument(
-    '--scaleFactor',
-    type=float,
-    default=FACEPARAMS.scaleFactor,
-    help='scale factor ({} by default, must > 1)'.format(FACEPARAMS.scaleFactor)
-)
-
-parser.add_argument(
-    '--minNeighbors',
-    type=int,
-    default=FACEPARAMS.minNeighbors,
-    help='minimum neighbors ({} by default, integer, must > 1)'.format(FACEPARAMS.minNeighbors)
-)
-
-parser.add_argument(
-    '--minSize',
-    type=int,
-    default=FACEPARAMS.minSize,
-    help='minimum size ({} by default, integer, must > 1)'.format(FACEPARAMS.minSize)
-)
-
 args = parser.parse_args()
+
+# Wrap face detection parameters.
 
 face_params = FaceParams(
     args.scaleFactor,

@@ -1,3 +1,4 @@
+import argparse
 import cv2 as cv
 import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
@@ -16,7 +17,26 @@ MARK_COLOR = (0, 255, 0)  # Green
 MARK_WIDTH = 4
 
 FaceParams = namedtuple('FaceParams', 'scaleFactor minNeighbors minSize')
-FACEPARAMS = FaceParams(1.2, 5, 30)
+FACEPARAMS = FaceParams(1.2, 5, 30)  # Default face detection parameters
+
+# Face detection parameter command line argument parser
+
+option_parser = argparse.ArgumentParser(add_help=False)
+option_parser.add_argument(
+    '--scaleFactor',
+    type=float,
+    default=FACEPARAMS.scaleFactor,
+    help='scale factor ({} by default, must > 1)'.format(FACEPARAMS.scaleFactor))
+option_parser.add_argument(
+    '--minNeighbors',
+    type=int,
+    default=FACEPARAMS.minNeighbors,
+    help='minimum neighbors ({} by default, integer, must > 1)'.format(FACEPARAMS.minNeighbors))
+option_parser.add_argument(
+    '--minSize',
+    type=int,
+    default=FACEPARAMS.minSize,
+    help='minimum size ({} by default, integer, must > 1)'.format(FACEPARAMS.minSize))
 
 
 def _plot_image(ax, img, cmap=None, label=''):
