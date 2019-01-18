@@ -38,21 +38,16 @@ if not camera.isOpened():
 
 # ----------------------------------------------------------------------
 # Setup plot
-# See [update frame in matplotlib with live camera preview](https://stackoverflow.com/a/44604435)
 # ----------------------------------------------------------------------
 
 plt.axis('off')  # Turn off axis in plot window
-plt.gcf().canvas.mpl_connect(  # Set plot window close event
-    "key_press_event",
-    lambda event: plt.close(event.canvas.figure) if event.key == 'q' else None
-)
 
 # ----------------------------------------------------------------------
 # Detect faces and show results
 # See [update frame in matplotlib with live camera preview](https://stackoverflow.com/a/44604435)
 # ----------------------------------------------------------------------
 
-print("\nPlease type 'q' to quit.")
+print("\nPlease close the window (Ctrl-w) to quit.")
 
 im = plt.gca().imshow(get_faces_frame(camera, face_params=face_params))
 video = FuncAnimation(
