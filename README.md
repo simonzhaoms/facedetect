@@ -4,12 +4,14 @@ This is a simple face detection example of using machine learning
 algorithms to search faces within a picture.  It originates from
 Shantnu Tiwari's tutorial -- [Face Recognition with Python, in Under
 25 Lines of
-Code](https://realpython.com/face-recognition-with-python/).  It uses
-[OpenCV](https://opencv.org) cascade to break the problem of detecting
-faces into multiple stages.  The algorithm starts at the top left of a
-picture and moves down across small blocks of data.  During the moves,
-a series of coarse-to-fine quick tests are carried out on each block.
-And it will only detect a face if all stages pass.
+Code](https://realpython.com/face-recognition-with-python/) and [Face
+Detection in Python Using a
+Webcam](https://realpython.com/face-detection-in-python-using-a-webcam/).
+It uses [OpenCV](https://opencv.org) cascade to break the problem of
+detecting faces into multiple stages.  The algorithm starts at the top
+left of a picture and moves down across small blocks of data.  During
+the moves, a series of coarse-to-fine quick tests are carried out on
+each block.  And it will only detect a face if all stages pass.
 
 See the github repository for examples of its usage:
 https://github.com/simonzhaoms/facedetect

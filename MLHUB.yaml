@@ -3,7 +3,7 @@ meta:
   name      : facedetect
   title     : Simple face detection.
   languages : py
-  version   : 0.2.4
+  version   : 0.2.5
   keywords  : face detection, python3, computer vision
   license   : gpl3
   display   : demo, score, live
@@ -25,5 +25,8 @@ dependencies:
     - README.md
 commands:
   demo: Demostrate face detection on sample images.
-  score: Detect faces on provided image files or URL.
+  score:
+    description: Detect faces on provided image files or URL.
+    required:
+      image: Path or URL to an image.
   live: Detect faces from live webcam.
