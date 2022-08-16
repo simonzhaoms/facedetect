@@ -13,8 +13,8 @@ dependencies:
     - matplotlib
     - toolz
   pip3:
-    - opencv-contrib-python==4.0.0.21
-    - numpy==1.14.5
+    - opencv-contrib-python
+    - numpy
   files:
     - demo.py
     - utils.py
